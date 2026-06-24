@@ -1,6 +1,7 @@
 // create user models and schemas here
-import { model, Schema } from "mongoose";
+import mongoose, { model, Schema } from "mongoose";
 
+mongoose.connect(process.env.MONGODB_URL!)
 
 const UserSchema = new Schema({
   username: { type: String, unique: true },
