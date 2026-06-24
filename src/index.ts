@@ -7,6 +7,8 @@ import { UserModel } from "./db.js";
 const app = express();
 app.use(express.json());
 
+// console.log(process.env.MONGODB_URL);
+
 app.post("/api/v1/signup", async (req, res) => {
   
   // TODO1: Add Zod Validation
