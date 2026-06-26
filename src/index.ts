@@ -86,8 +86,8 @@ app.delete("/api/v1/content", userMiddleware, async (req, res) => {
   const contentId = req.body.contentId;
 
   await ContentModel.deleteMany({
-    contentId,
-    userId: req.userId
+    _id: new mongoose.Types.ObjectId(contentId),
+    userId: new mongoose.Types.ObjectId(req.userId),
   });
 
   res.json({ message: "Deleted!" });
