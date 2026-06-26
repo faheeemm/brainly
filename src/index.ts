@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 import { UserModel } from "./db.js";
 import { JWT_PASS } from "./config.js";
+import { userMiddleware } from "./middleware.js";
 
 const app = express();
 app.use(express.json());
@@ -49,8 +50,9 @@ app.post("/api/v1/signin", async (req, res) => {
   }
 });
 
-app.post("/api/v1/content", (req, res) => {
-  
+app.post("/api/v1/content", userMiddleware, (req, res) => {
+  const link = req.body.link;
+  const type = req.body.type;
 });
 
 app.get("/api/v1/content", (req, res) => {
