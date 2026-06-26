@@ -68,9 +68,10 @@ app.post("/api/v1/content", userMiddleware, async (req, res) => {
   res.json({ message: "content added" });
 });
 
-app.get("/api/v1/content", async (req, res) => {
+app.get("/api/v1/content", userMiddleware, async (req, res) => {
   
-  const userId = req.query.userId;
+  // const userId = req.query.userId;
+  const userId = req.userId;
   try {
     //@ts-ignore
     const content = await ContentModel.find({ userId }).populate("userId", "username");
