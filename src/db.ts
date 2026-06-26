@@ -18,9 +18,10 @@ export const UserModel = model("User", UserSchema);
 
 const ContentSchema = new Schema({
   title: String,
-  links: String,
+  link: String,
+  // type: { type: String, enum: ["article", "video", "tweet", "document", "youtube"], required: true },
   tags: [{ type: mongoose.Types.ObjectId, ref: 'Tag' }],
   userId: { type: mongoose.Types.ObjectId, ref: 'User', required: true }
 });
 
-export const contentModel = model("Content", ContentSchema);
+export const ContentModel = model("Content", ContentSchema);

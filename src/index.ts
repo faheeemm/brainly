@@ -2,7 +2,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
-import { UserModel } from "./db.js";
+import { ContentModel, UserModel } from "./db.js";
 import { JWT_PASS } from "./config.js";
 import { userMiddleware } from "./middleware.js";
 
@@ -50,9 +50,18 @@ app.post("/api/v1/signin", async (req, res) => {
   }
 });
 
-app.post("/api/v1/content", userMiddleware, (req, res) => {
+app.post("/api/v1/content", userMiddleware, async (req, res) => {
   const link = req.body.link;
   const type = req.body.type;
+
+  await ContentModel.create({
+    link,
+    // type,
+    userId: req.userId,
+    tags: []
+  })
+  
+  res.json({ message: "content added" });
 });
 
 app.get("/api/v1/content", (req, res) => {
