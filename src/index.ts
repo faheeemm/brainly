@@ -59,12 +59,26 @@ app.post("/api/v1/content", userMiddleware, async (req, res) => {
     // type,
     userId: req.userId,
     tags: []
-  })
+  });
+
+  console.log("post request: ", req.userId);
   
   res.json({ message: "content added" });
 });
 
-app.get("/api/v1/content", (req, res) => {
+app.get("/api/v1/content", async (req, res) => {
+  
+  const userId = req.query.userId;
+  try {
+
+    //@ts-ignore
+    const content = await ContentModel.find({ userId });
+    res.json({ content });
+    
+  } catch (e) {
+    return e;
+  }
+  console.log("get request: ", req.query.userId);
   
 });
 
