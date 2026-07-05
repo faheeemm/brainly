@@ -31,7 +31,7 @@ app.post("/api/v1/signup", async (req, res) => {
   const parsed = signupSchema.safeParse(req.body);
  
   if (!parsed.success) {
-    return res.status(411).json({
+    return res.status(400).json({
       message: "Validation failed!",
       errors: z.flattenError(parsed.error).fieldErrors,
     });
@@ -46,7 +46,7 @@ app.post("/api/v1/signup", async (req, res) => {
     await UserModel.create({ username, password: hashedPassword });
     res.json({ message: "User signed up!" });
   } catch (e) {
-    res.status(411).send({ message: "User already exists!" });
+    res.status(409).send({ message: "User already exists!" });
   }
 });
 
