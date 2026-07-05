@@ -7,9 +7,11 @@ import bcrypt from "bcrypt";
 import { ContentModel, LinkModel, UserModel } from "./db.js";
 import { JWT_PASS } from "./config.js";
 import { userMiddleware } from "./middleware.js";
+import cors from "cors";
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 const SALT_ROUNDS = 10;
 
