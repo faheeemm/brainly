@@ -17,7 +17,7 @@ Second Brain is your personal knowledge management system designed to store, org
 ###  **Date Stamping**
 - Automatically capture timestamps for every note to track when it was created or updated.
 
-###  ** Responsive Design**
+###  **Responsive Design**
 - A design optimized for a smooth experience across desktop devices, ensuring usability and clarity.
 
 ###  **Share Your Brain**
