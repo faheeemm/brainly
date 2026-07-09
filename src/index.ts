@@ -71,18 +71,21 @@ app.post("/api/v1/signin", async (req, res) => {
 });
 
 app.post("/api/v1/content", userMiddleware, async (req, res) => {
-  const { title, link } = req.body;
+  const { title, link, type } = req.body;
 
-  await ContentModel.create({
-    title,
-    link,
-    // type,
-    userId: req.userId,
-    tags: [],
-  });
-
-  // console.log("post request: ", req.userId);
-  res.json({ message: "content added" });
+  try {
+      await ContentModel.create({
+        title,
+        link,
+        type,
+        userId: req.userId,
+        tags: [],
+      });
+  
+      res.json({ message: "content added" });
+    } catch (e) {
+      res.status(400).json({ message: "Failed to add content", error: e instanceof Error ? e.message : e });
+    }
 });
 
 app.get("/api/v1/content", userMiddleware, async (req, res) => {
